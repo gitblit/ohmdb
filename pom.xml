@@ -13,7 +13,6 @@
 	<version>1.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>OhmDB</name>
 	<url>http://www.ohmdb.com</url>
 	<description>OhmDB - The Irresistible RDBMS + NoSQL Database for Java</description>
 
@@ -71,7 +70,6 @@
 		<module>ohmdb-dsl</module>
 		<module>ohmdb-internal-api</module>
 		<module>ohmdb-utils</module>
-		<module>ohmdb-all</module>
 	</modules>
 
 	<distributionManagement>

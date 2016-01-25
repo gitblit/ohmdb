@@ -7,7 +7,7 @@
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>ohmdb-core</artifactId>
+	<artifactId>ohmdb</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>

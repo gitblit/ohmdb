@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.gitblit.ohmdb</groupId>
-			<artifactId>ohmdb-core</artifactId>
+			<artifactId>ohmdb</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
