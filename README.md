@@ -30,7 +30,7 @@ Add the following snippet to the `<dependencies>` section in pom.xml:
 <dependency>
     <groupId>com.gitblit.ohmdb</groupId>
     <artifactId>ohmdb</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
