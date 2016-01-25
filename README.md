@@ -1,3 +1,12 @@
+**NOTE:**
+This is a fork of the original OhmDB project which...
+
+1. Requires Java 8
+2. Improves support for persisting and retrieving objects
+3. Ensures strings are encoded and decoded as UTF8 instead of the system encoding.
+
+While the API remains unchanged, the change to the string encoding **may** not be compatible with existing OhmDB 1.0.0 files. YMMV.
+
 OhmDB - The Irresistible RDBMS + NoSQL Database for Java
 =====
 
@@ -13,15 +22,15 @@ Add the following snippet to the `<dependencies>` section in pom.xml:
 
 ```xml
 <dependency>
-    <groupId>com.ohmdb</groupId>
-    <artifactId>ohmdb-all</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.gitblit.ohmdb</groupId>
+    <artifactId>ohmdb</artifactId>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 # Quick start
 
-* Add the `ohmdb-all` dependency to your Maven project (as described above).
+* Add the `ohmdb` dependency to your Maven project (as described above).
 
 * Add the following code to your project, and execute it:
  
@@ -76,7 +85,7 @@ DB.insert(new Item("item1"));
 
 # Contributing
 
-1. Fork (and then `git clone https://github.com/ohmdb/ohmdb.git`).
+1. Fork (and then `git clone https://github.com/gitblit/ohmdb.git`).
 2. Create a branch (`git checkout -b branch_name`).
 3. Commit your changes (`git commit -am "Description of contribution"`).
 4. Push to the branch (`git push origin branch_name`).
