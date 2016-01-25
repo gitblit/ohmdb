@@ -8,14 +8,19 @@
 		<version>9</version>
 	</parent>
 
-	<groupId>com.ohmdb</groupId>
-	<artifactId>ohmdb</artifactId>
+	<groupId>com.gitblit.ohmdb</groupId>
+	<artifactId>ohmdb-parent</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>OhmDB</name>
 	<url>http://www.ohmdb.com</url>
 	<description>OhmDB - The Irresistible RDBMS + NoSQL Database for Java</description>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/gitblit/ohmdb/issues/</url>
+	</issueManagement>
 
 	<organization>
 		<name>Nikolche Mihajlovski</name>
@@ -37,12 +42,18 @@
 			<email>nikolce.mihajlovski@gmail.com</email>
 			<url>http://www.nikolche.com</url>
 		</developer>
+		<developer>
+			<name>James Moger</name>
+			<email>james.moger@gmail.com</email>
+			<organization>gitblit.com</organization>
+			<organizationUrl>https://github.com/gitblit</organizationUrl>
+		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/ohmdb/ohmdb.git</connection>
-		<developerConnection>scm:git:git@github.com:ohmdb/ohmdb.git</developerConnection>
-		<url>https://github.com/ohmdb/ohmdb</url>
+		<connection>scm:git:git://github.com/gitblit/ohmdb.git</connection>
+		<developerConnection>scm:git:git@github.com:gitblit/ohmdb.git</developerConnection>
+		<url>https://github.com/gitblit/ohmdb</url>
 	  <tag>HEAD</tag>
   </scm>
 
@@ -63,174 +74,95 @@
 		<module>ohmdb-all</module>
 	</modules>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
+			<!-- Java Compiler plugin -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.2</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>sonatype-nexus-snapshots</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>1.6</version>
-				<configuration>
-					<verbose>false</verbose>
-					<licenseName>apache_v2</licenseName>
-					<canUpdateCopyright>true</canUpdateCopyright>
-					<canUpdateDescription>true</canUpdateDescription>
-				</configuration>
-				<executions>
-					<execution>
-						<id>first</id>
-						<goals>
-							<goal>update-file-header</goal>
-						</goals>
-						<phase>process-sources</phase>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.17</version>
-				<configuration>
-					<argLine>-Xms512m -Xmx1024m</argLine>
-				</configuration>
-			</plugin>
-
+			<!-- Release plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
+					<!-- install next final version in local repo, so that tests on archetypes work -->
+					<preparationGoals>clean install</preparationGoals>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<releaseProfiles>release</releaseProfiles>
 					<goals>deploy</goals>
+					<tagNameFormat>release-@{project.version}</tagNameFormat>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<retryFailedDeploymentCount>3</retryFailedDeploymentCount>
-				</configuration>
-			</plugin>
-
 		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											license-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.6,)
-										</versionRange>
-										<goals>
-											<goal>
-												update-file-header
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-enforcer-plugin
-										</artifactId>
-										<versionRange>
-											[1.0,)
-										</versionRange>
-										<goals>
-											<goal>enforce</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<profiles>
 		<profile>
-			<id>pre-release</id>
+			<id>release</id>
 			<build>
 				<plugins>
+					<!-- Java Source plugin -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
-						<version>2.2.1</version>
 						<executions>
 							<execution>
 								<id>attach-sources</id>
 								<goals>
-									<goal>jar-no-fork</goal>
+									<goal>jar</goal>
 								</goals>
 							</execution>
 						</executions>
 					</plugin>
 
+					<!-- JavaDoc plugin -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.9.1</version>
-						<configuration>
-							<version>false</version>
-							<author>false</author>
-							<keywords>true</keywords>
-							<breakiterator>false</breakiterator>
-							<detectOfflineLinks>false</detectOfflineLinks>
-						</configuration>
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
 								<goals>
 									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<additionalparam>-Xdoclint:none</additionalparam>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- GPG plugin to sign the artifacts -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
 								</goals>
 							</execution>
 						</executions>
@@ -238,11 +170,7 @@
 				</plugins>
 			</build>
 		</profile>
-
-		<!-- <profile> <id>release</id> <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
-			<artifactId>maven-gpg-plugin</artifactId> <version>1.5</version> <executions> 
-			<execution> <id>sign-artifacts</id> <phase>verify</phase> <goals> <goal>sign</goal> 
-			</goals> </execution> </executions> </plugin> </plugins> </build> </profile> -->
 	</profiles>
+
 
 </project>

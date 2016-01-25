@@ -2,19 +2,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.ohmdb</groupId>
-		<artifactId>ohmdb</artifactId>
+		<groupId>com.gitblit.ohmdb</groupId>
+		<artifactId>ohmdb-parent</artifactId>
 		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>ohmdb-all</artifactId>
+	<artifactId>ohmdb</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.ohmdb</groupId>
+			<groupId>com.gitblit.ohmdb</groupId>
 			<artifactId>ohmdb-core</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>
 
