@@ -1,22 +1,28 @@
-**NOTE:**
-This is a fork of the original OhmDB project which...
+OhmDB
+=====
 
-1. Requires Java 8
-2. Improves support for persisting and retrieving objects
+> OhmDB is "the irresistible database" that offers the power of relational databases and the flexibility of NoSQL databases.
+
+[![Maven Central](http://img.shields.io/maven-central/v/com.gitblit.ohmdb/ohmdb.svg)](http://search.maven.org/#search|ga|1|com.gitblit.ohmdb)
+[![Maven Central](https://img.shields.io/github/license/gitblit/ohmdb.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+## Fork
+
+OhmDB is a great tool to persist, retrieve, and query objects from disk.  Whether it lives up to the above blockquote written by the original author is for you to decide.
+
+This fork of OhmDB makes some modest changes including...
+
+1. Requiring Java 8
+2. Improved support for nested POJO fields persisted in your tables
 3. Ensures strings are encoded and decoded as UTF8 instead of the system encoding.
 
 While the API remains unchanged, the change to the string encoding **may** not be compatible with existing OhmDB 1.0.0 files. YMMV.
 
-OhmDB - The Irresistible RDBMS + NoSQL Database for Java
-=====
-
-OhmDB is "the irresistible database" that offers the power of relational databases and the flexibility of NoSQL databases.
-
-# Apache Public License v2
+## Apache Public License v2
 
 OhmDB is released under the liberal APL v2 license, so it is free to use for both commercial and non-commercial projects.
 
-# Using with Maven
+## Using with Maven
 
 Add the following snippet to the `<dependencies>` section in pom.xml:
 
@@ -28,7 +34,7 @@ Add the following snippet to the `<dependencies>` section in pom.xml:
 </dependency>
 ```
 
-# Quick start
+## Quick start
 
 * Add the `ohmdb` dependency to your Maven project (as described above).
 
@@ -59,7 +65,7 @@ public class Main {
 }
 ```
 
-# Features
+## Features
 
 * Simple setup, no configuration (just add it as Maven dependency, and you are ready!)
 
@@ -83,7 +89,7 @@ DB.insert(new Item("item1"));
 
 * Single-file storage (e.g. my.db), so "backup" == "copy the file!"
 
-# Contributing
+## Contributing
 
 1. Fork (and then `git clone https://github.com/gitblit/ohmdb.git`).
 2. Create a branch (`git checkout -b branch_name`).
